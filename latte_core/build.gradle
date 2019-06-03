@@ -1,13 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
-    compileSdkVersion 28
-
+    compileSdkVersion 26
+    buildToolsVersion "26.0.3"
 
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion 19
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
 
@@ -25,15 +26,29 @@ android {
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
-    api 'com.android.support:support-v4:28.0.0'
-    api 'com.android.support:appcompat-v7:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    api project(':latte_annotations')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
 
     //字体图标
-    api 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
-    api 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+    compile 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
+    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
+    //Fragment依赖
+    compile 'me.yokeyword:fragmentation:1.0.3'
+    compile 'me.yokeyword:fragmentation-swipeback:1.0.3'//边缘滑动回到上一个页面
+    //ButterKnife依赖
+    compile 'com.jakewharton:butterknife:8.6.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    //网络请求依赖
+    compile 'com.squareup.okio:okio:1.13.0'
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.3.0'
+
+    compile 'com.android.support:appcompat-v7:26.0.0'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support.constraint:constraint-layout:1.1.3'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile project(':latte_annotations')
+
 }
